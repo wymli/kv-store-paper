@@ -61,7 +61,7 @@ bitcask设计的在磁盘上的kv item的结构是非常简单的
 - tstamp指示写入时间
 - key size, value size 是定长的,用于表示不定长的key,value的大小
 
-<img src="C:\Users\salvare000\AppData\Roaming\Typora\typora-user-images\image-20211017173315107.png" alt="image-20211017173315107" style="zoom:80%;" />
+<img src=".\asset\image-20211017173315107.png" alt="image-20211017173315107" style="zoom:80%;" />
 
 <img src=".\asset\image-20211017173619360.png" alt="image-20211017173619360" style="zoom:80%;" />
 
@@ -75,7 +75,7 @@ bitcask中,位于内存中的数据结构称为`keydir`,起索引的作用,这�
 
 <img src=".\asset\image-20211017174609807.png" alt="image-20211017174609807" style="zoom:80%;" />
 
-<img src="http://my.huhoo.net/study/bitcask.jpg" alt="存储引擎简介- My Study" style="zoom:80%;" />
+
 
 ### CRUD
 
