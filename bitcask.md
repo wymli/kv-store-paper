@@ -1,6 +1,6 @@
 # BitCask
 
-> 
+<img src=".\asset\image-20211018011541860.png" alt="image-20211018011541860" style="zoom:80%;" />
 
 ## KV 存储背景
 
@@ -47,7 +47,7 @@ bitcask 将kv item数据写入文件系统, 在任何一个时刻,只有一个�
 
 一个被关闭的文件,无论是因为主动关闭(因文件大小到达阈值),还是由于server意外退出,它永远不会被再打开,其数据被认为是不可变的(immutable)
 
-<img src="C:\Users\salvare000\AppData\Roaming\Typora\typora-user-images\image-20211017173114988.png" alt="image-20211017173114988" style="zoom:75%;" />
+<img src=".\asset\image-20211017173114988.png" alt="image-20211017173114988" style="zoom:75%;" />
 
 ### 顺序写
 
@@ -63,7 +63,9 @@ bitcask设计的在磁盘上的kv item的结构是非常简单的
 
 <img src="C:\Users\salvare000\AppData\Roaming\Typora\typora-user-images\image-20211017173315107.png" alt="image-20211017173315107" style="zoom:80%;" />
 
-<img src="C:\Users\salvare000\AppData\Roaming\Typora\typora-user-images\image-20211017173619360.png" alt="image-20211017173619360" style="zoom:80%;" />
+<img src=".\asset\image-20211017173619360.png" alt="image-20211017173619360" style="zoom:80%;" />
+
+
 
 **Thus, a Bitcask data file is nothing more than a linear sequence of these entries**
 
@@ -71,7 +73,9 @@ bitcask设计的在磁盘上的kv item的结构是非常简单的
 
 bitcask中,位于内存中的数据结构称为`keydir`,起索引的作用,这个数据结构本身是一个扁平化的hash表(非树状或层级表)
 
-<img src="C:\Users\salvare000\AppData\Roaming\Typora\typora-user-images\image-20211017174609807.png" alt="image-20211017174609807" style="zoom:80%;" />
+<img src=".\asset\image-20211017174609807.png" alt="image-20211017174609807" style="zoom:80%;" />
+
+<img src="http://my.huhoo.net/study/bitcask.jpg" alt="存储引擎简介- My Study" style="zoom:80%;" />
 
 ### CRUD
 
@@ -132,7 +136,7 @@ bitcask中,位于内存中的数据结构称为`keydir`,起索引的作用,这�
 
 5. ease of backup and restore
 
-   备份只需复制数据文件和hint-file即可
+   备份只需复制数据文件和hint-file即可(也就是复制文件夹)
 
    恢复只需把备份的文件拷贝到文件夹即可
 
@@ -140,9 +144,17 @@ bitcask中,位于内存中的数据结构称为`keydir`,起索引的作用,这�
 
    数据结构本身是简洁明了的
 
+## 缺点
+
+1. 要在内存中维护所有key的索引,需要有足够大的内存
+   1. 但是可以通过分片sharding的方式做水平拓展
+2. 类LSM的通病: 写放大
+
 ## Ref
 
-- [J. Sheehy and D. Smith. Bitcask: A Log-Structured Hash Table for
-  Fast Key/Value Data. Basho White Paper, 2010.](https://riak.com/assets/bitcask-intro.pdf)
-- [Idreos, Stratos et al. “Learning Key-Value Store Design.” (2019)](https://arxiv.org/pdf/1907.05443.pdf)
+[J. Sheehy and D. Smith. Bitcask: A Log-Structured Hash Table for
+Fast Key/Value Data. Basho White Paper, 2010.](https://riak.com/assets/bitcask-intro.pdf)
 
+[Idreos, Stratos et al. “Learning Key-Value Store Design.” (2019)](https://arxiv.org/pdf/1907.05443.pdf)
+
+[[FAST '16] *WiscKey*, *Separating Keys* from Values in SSD-conscious Storage](https://www.usenix.org/system/files/conference/fast16/fast16-papers-lu.pdf)
