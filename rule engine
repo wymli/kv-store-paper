@@ -1,0 +1,64 @@
+规则引擎
+
+
+参数: 用户信息,商品信息等等
+返回: 0或1, 代表通过与否
+
+规则引擎用于过滤
+
+规则引擎的配置可以使用json,比如:
+{
+  "engine_name": "1"
+  "rule":{
+    "relations": "x && y" <- 关系也可以直接放在condition里面,表示与下一个condition的关系
+    "conditions": [
+      {
+        "condition_name":"x"
+        "relations":"a && b"
+        "conditions":[
+          {
+            "condition_name":"a",
+            "disabled":"false",
+            "key":"userid",
+            "op":"==",
+            "target":"12345",
+            "type":"string",
+          },
+          {
+            "condition_name":"b",
+            ...
+          },
+        ]
+       },
+       {
+       ...
+       }
+    ]
+  }
+}
+一直递归下去
+
+如何解析和求值?
+可以维护一个栈和bool值
+bool值表示最近的一个op求值的结果,比如 
+{
+  "condition_name":"a",
+  "disabled":"false",
+  "key":"userid",
+  "op":"==",
+  "target":"12345",
+  "type":"string",
+},
+
+先将input.userid入栈,如果反射没找到,就将flag置为false,检查flag,为false就直接返回flag, 再将“1234”入栈
+比较栈顶的两个元素,结果放在flag,然后pop这两个元素,检查flag
+
+
+
+
+
+
+
+
+
+
